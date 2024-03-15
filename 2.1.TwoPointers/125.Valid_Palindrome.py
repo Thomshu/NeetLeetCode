@@ -50,3 +50,30 @@ class Solution:
             #r = r - (not b.isalnum())
 
         return True
+    
+    #Alternative Solution without built in functions like isalnum() (using ASCII values)
+    #Alphanumerical function
+    def alphaNum(self, c):
+        #ord(c) function to get the ASCII value of the character
+        # This will return true if its alphanumeric, otherwise returns false
+        return ((ord('A') <= ord(c) and ord(c) <= ord('Z')) or
+                (ord('a') <= ord(c) and ord(c) <= ord('z')) or
+                ord('0') <= ord(c) and ord(c) <= ord('9'))
+
+
+    def isPalindrome(self, s: str) -> bool:
+        l = 0 #Starting at the beginning index
+        r = len(s)-1 # end index
+
+        #check and converge from beginning to end.
+        while l < r:
+            while l < r and not self.alphaNum(s[l]): #Have to use the self keyword in python to call another function within an object
+                l+=1
+            while r > l and not self.alphaNum(s[r]):
+                r-=1
+                
+            if s[l].lower() != s[r].lower():
+                return False
+            l, r = l + 1, r -1
+
+        return True
