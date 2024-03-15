@@ -17,7 +17,7 @@ Output: true
 
 Example 3:
 Input: s = "(]"
-Output: false
+Output: false 
 '''
 
 class Solution:
