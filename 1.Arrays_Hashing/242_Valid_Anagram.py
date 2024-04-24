@@ -35,3 +35,31 @@ class Solution:
             return True
         else:
             return False
+
+# NeetCode Solution 1 O(s+t) time complexity)
+class Solution2:
+    def isAnagram(self, s: str, t: str) -> bool:
+        #Quick Check possible at the very beginning, simply check if the two strings have the same length, if not, we know its not possible to be an anagram
+        if len(s) != len(t):
+            return False
+        countS, countT = {}, {}
+        
+        for i in range(len(s)):
+            countS[s[i]] = 1 + countS.get(s[i], 0) # note cannot be countS[s[i]] = 1 + countS(s[i]) because countS(s[i]) may not exist already yet, so must use get( , 0) <= 0 is default value
+            countT[t[i]] = 1 + countT.get(t[i], 0)
+            
+        for c in countS:
+            if countS[c] != countT.get(c, 0): #once again we use get here just in case that character does NOT exist in T
+                return False
+        
+        #Went through all the checks and loops, no return Falses or exiting early, thus it is an anagram
+        return True
+
+# NeetCode Solution 2, trying to get O(1) time compelexity
+# Apparently some interviewers can see that sorting (depending on the library you use), is at best O(1) time complexity, so if we were to sort the two strings, then do direct comparison, it would obviously be the same string
+#   if it was an anagram, thus we can quickly return true or false, and have O(1) time complexity
+class Solution3:
+    def isAnagram(self, s: str, t: str) -> bool:
+        return sorted(s) == sorted(t)
+    
+    #Possibly interviewer will ask you to write out your own sorting function
